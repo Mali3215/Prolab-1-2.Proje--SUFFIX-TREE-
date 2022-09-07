@@ -1,0 +1,149 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{fontenc}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\Large
+\begin{document}
+
+\title{KOCAELI UNIVERSITESI\\BILGISAYAR MUHENDISLIGI\\-\\PROLAB I-2\\SUFFIX TREE}
+
+\author{\IEEEauthorblockN{Muhammed Numan MERCAN}
+\IEEEauthorblockA{\textit{200202098} \\
+\\
+}
+\and
+\IEEEauthorblockN{Mehmet Ali AKDOGAN}
+\IEEEauthorblockA{20202017} \\
+
+
+
+
+}
+
+\maketitle
+
+
+
+\begin{large}
+
+
+\section{\textbf{BAŞLARKEN}}
+Bu projede sonek agaclarini (suffix tree) kullanarak stringler uzerinde arama islemleri yapilmasi istenmiştir.\\
+Suffix , bir stringin bir karakterinden sonuna kadar olan her karakter dizisine verilen isimdir.
+Bir katarın (p) başka bir katar (s) içinde bulunması aslında p’nin s’in herhangi bir sonekinin öneki olmasını gerektirir. \\
+Sonek agacini daha iyi anlamaniz için soyle bir tanim yapabiliriz:\\
+n uzunluklu s stringin suffix tree si su ozelliklere sahip olur : \\
+• Ağacın 1’den n’e kadar numaralandırılmış n adet yaprağı vardır\\
+• Kök dışında her düğümün en az iki çocuğu vardır.\\
+• Her kenar s’in boş olmayan bir altkatarı ile etiketlenir.\\
+• Aynı düğümden çıkan kenarların etiketleri farklı karakter ile başlamalıdır.\\
+• Kökten başlayıp k. yaprağa giden yoldaki kenarların etiklerinin birleştirilmesi ile k. sonek elde edilir.\\
+
+\section{\textbf{OZET}}
+
+Projeye suffix algoritmasını verilen kaynaklardan mantığı anlamaya calisarak basladik. Karmasik ve istenilen dilde ornegi cok kisitli olan bu algoritmayi mantik olarak ogrendikten sonra kişim kişim kodlamaya calisarak C dilinde pratiğini yaptık , fakat kodlama kismi beklediğimizden daha zor gelişti ve ilerlemek için cok vakit harcamamiz gerekti.\\
+Bu cabalarin ardindan 2. Buyuk ister olan bu algoritmayı grafiksel bir arayuze tasimak icin grafik kutuphanesi ve kodlarini ogrenmeye koyulduk. Yine uzun suren bir cabanin ardindan yavas yavas göze hitap edebilen bir arayuz geliştirdik. Fakat bu arayuzde normal terminalde calisan kodlar gibi bir kolaylık soz konusu değildi cunku kodlar otomatik bir sekilde değil manuel olarak verilmesi gereken koordinatlara gore yerlesiyorlardi. Uzun suren ugraslar sonunda tam olarak bitmemis olsada iyi bir yol kat edilmiş proje elimizdeydi. \\
+Bu raporda da yaptigimiz bu projeyi her tarafıyla paylaşıyor olacağız.
+
+
+\section{\textbf{GİRİŞ}}
+Sonek ve onek ilişkisi ile algoritmayı oluşturmaya basladik , basta ilkel yöntemlerle normal karakter dizileriyle kontrol ve etkileşimleri oluşturmaya calistik.Ardindan daha kompleks sekilde isterleri tamamlamaya basladik , ağaç yapisini kurduk ve arama işlemleri üzerinde ugrastik. Bu kisimda yapabildiğimizi yaptık. Bu işlemler yeterli seviyeye geldiğinde yavaş yavaş grafiksel arayuze aktarmaya basladik. Once koordinatları belirleyerek terminaldeki gibi bir string listesi ortaya cikarttik. Ardindan bu dizgilerin agacin hangi yapraklari olduğunu biraz karmasik bir sıralama ile göstermeyi basardik. Tabii normal bir ağaç yapisi yakalamamiz pek kolay olmadigi icin kisitli sure içinde yapabileceğimiz bir grafik oluşturduk.
+
+\subsection{YONTEM ve İLERLEYİŞ}\label{AA}
+Biz oncelikle bir ağaç yapisini kolayca kurup kullanmayi ardindan onu grafik arayuzune nasil aktarabileceğimizi ogrenmeye calistik , tam olarak bir planimiz yoktu cunku suffix tree bizimde ilk defa karsilastigimiz bir kavramdı bu yüzden akış semasi nı oluşturmadan projeye basladik. Pek verimli olmasa da bir ilerleme kaydetmemizi sağladı bu yöntem.\\
+Amacimiz ağaca benzer en yakin ve anlasilir grafiği elde etmek olduğu icin oncelikle ornek benzer ağaç yapilarini ve onları terminale nasil cizildigini inceledik. Bu bize ise yarar fikirler verdi ve o sekilde ilerlemeye karar verdik.
+
+\subsection{Hedeflenen Ornekler}
+
+
+\begin{figure}[htbp]
+
+\centerline{\includegraphics[width=0.5\textwidth]{agac yapisi.png}}
+\caption{Ornek bir suffix tree}
+\label{fig0}
+Bu agac yapisi tam anlamiyla bir suffix tree ye karsilik gelir.Suffix tree mantıgını dallanmalardan anlayabilirsiniz. aynı karakterle baslayan sonekler ortak bir dallanmayla dagiliyorlar , bazi islemleri bu dallanma hesaplari ile yapiyor olacagiz.
+\end{figure}
+
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.48\textwidth]{C++ornegi.png}}
+\caption{Terminalde yapilmis bir agac ornegi}
+\label{fig1}
+Bu ornekte C programlama ile yapabilecegimiz grafige daha yakin bir ornek sunuyor. Dallanmalar ornekte de anlasilacagi uzere daha ucuz ve akillica bir bicimde bir kac adet sembol ve bosluk ile halledilmis durumda.
+\end{figure}
+
+Asagida Suffix tree yi grafiksel olarak ve terminalde semboller ile gosterimini bulacaksiniz\\
+
+\section{\textbf{SONUCLAR}}
+Bizim projede gelebildigimiz nokta isterlerin cogunu karsilamakla birlikte uzun ugraslar verildigi halde cozulemeyen bazı kisimlarin oldugudur. Basarili kisimlari ve hatalarimizi raporun ilerleyen kisimlarinda paylasiyor olacagiz. Bu projenin sonunda suffix tree yi prefix leriyle birlikte arastirmanin daha kolay oldugunu ogrendik. Suffix tree genelde biyolojik bilimsel arastirmalarda kullanilmakla birlikte bazi kolaylik sagladigi farkli alanlarda bulunuyor , biz bi cok ornege de bu tarz alanlarida arastirarak ulastik \\\\Ana Semaya sigmayan fonksiyon semalarini ayri semalar olarak paylastik.\\
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.35\textwidth]{demoOrnek.png}}
+\caption{Terminaldeki demomuz}
+\label{fig2}
+Bu bizim ukonnen algoritmasini arastirirken ogrendigimiz ve kendimize uyarladıgımız terminalde yakaladigimiz referans sonuc ciktimiz.\\
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.42\textwidth]{grafikDemo.png}}
+\caption{Grafik ciktisi demomuz}
+\label{fig3}
+Ayni algoritma ve terminal ciktisindan esinlenerek koordinatlari ayarlayip olusturdugumuz grafik arayuzumuz.\\ Bu kisim demo kisim ilerleme kaydedilen hali de paylasilacaktir.\\Bu paylasimlarimiz ve esinlendigimiz tum kaynaklari da asagida kaynakca kisminda paylasiyor olacagiz.\\
+\end{figure}
+
+
+\begin{figure}[htbp]
+
+\includegraphics[scale=0.5]{MainFC.png}
+\caption{Akis Semasi Ana Govde}
+\label{fig4}
+Main FlowChart , basic links\\
+
+\end{figure}
+
+
+\begin{figure}
+\centerline{\includegraphics[width=0.5\textwidth]{3.Fonk.png}}
+\caption{Akis Semasi case 3 func.}
+\label{fig5}
+String bulma FlowChart ,\\
+
+\end{figure}
+
+
+\begin{figure}
+\centerline{\includegraphics[width=0.5\textwidth]{4.Fonk.png}}
+\caption{Akis semasi case 4 func}
+\label{fig6}
+
+\end{figure}
+
+
+
+
+
+\vspace{1000pt}
+\color{blue}
+\vspace{1000pt}
+\section{\textbf{KAYNAKCA}}
+\vspace{700pt}
+\begin{itemize}
+\item https://www.koseburak.net/blog/suffix-tree/\\
+\item https://en.wikipedia.org/wiki/Suffix-tree\\
+\item https://web.stanford.edu/~mjkay/suffix-tree.pdf\\
+\item https://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english/95134239513423/\\
+\item https://www.bigocheatsheet.com/\\
+\item https://github.com/brenden/ukkonen-animation\\
+\end{itemize}
+
+\vspace{15pt}
+\end{large}
+\end{document}
