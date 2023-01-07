@@ -20,3 +20,4 @@ karakter ile bas¸lamalıdır.
 • Kokten bas¸layıp k. yapra ¨ ga giden yoldaki ˘
 kenarların etiklerinin birles¸tirilmesi ile k. sonek
 elde edilir.
+Projenin detayları rapor kısmında paylaşılmıştır.
